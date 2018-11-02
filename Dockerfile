@@ -43,7 +43,9 @@ ENV CONDA_DIR=/opt/conda \
 ENV PATH=$CONDA_DIR/bin:$PATH \
     HOME=/home/$NB_USER
 
+RUN chmod a+x fix-permissions
 ADD fix-permissions /usr/local/bin/fix-permissions
+
 # Create jovyan user with UID=1000 and in the 'users' group
 # and make sure these dirs are writable by the `users` group.
 RUN groupadd wheel -g 11 && \
@@ -126,6 +128,7 @@ COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 COPY jupyter_notebook_config.py /etc/jupyter/
+RUN cd /usr/local/bin; chmod a+x start.sh start-notebook.sh start-singleuser.sh
 RUN fix-permissions /etc/jupyter/
 
 # Switch back to jovyan to avoid accidental container runs as root
