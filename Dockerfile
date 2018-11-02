@@ -43,6 +43,8 @@ ENV CONDA_DIR=/opt/conda \
 ENV PATH=$CONDA_DIR/bin:$PATH \
     HOME=/home/$NB_USER
 
+RUN pwd
+RUN ls -l
 RUN chmod a+x fix-permissions
 ADD fix-permissions /usr/local/bin/fix-permissions
 
