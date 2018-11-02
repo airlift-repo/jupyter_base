@@ -43,10 +43,11 @@ ENV CONDA_DIR=/opt/conda \
 ENV PATH=$CONDA_DIR/bin:$PATH \
     HOME=/home/$NB_USER
 
-RUN pwd
-RUN ls -l
-RUN chmod a+x fix-permissions
+# RUN pwd
+# RUN ls -l
+# RUN chmod a+x fix-permissions
 ADD fix-permissions /usr/local/bin/fix-permissions
+RUN chmod a+x /usr/local/bin/fix-permissions; ls -l /usr/local/bin/fix-permissions
 
 # Create jovyan user with UID=1000 and in the 'users' group
 # and make sure these dirs are writable by the `users` group.
